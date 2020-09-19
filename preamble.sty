@@ -43,6 +43,14 @@
 \usepackage[linesnumbered, lined, ruled]{algorithm2e}
 % Spacing
 \usepackage{setspace}
+% Titles
+\usepackage{titling}
+\setlength{\droptitle}{-8em}
+
+% General Prettiness
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{lastpage}
 
 % Colors
 \usepackage{xcolor}
@@ -76,10 +84,10 @@
 % \usepackage{natbib}
 %\usepackage{biblatex}
 
-\usepackage[
-    backend=biber,
-    style=authoryear,
-  ]{biblatex}
+% \usepackage[
+%     backend=biber,
+%     style=authoryear,
+%   ]{biblatex}
 
 % Indent
 \usepackage{indentfirst}
@@ -99,8 +107,6 @@
 %source code
 \usepackage{listings}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
-% NOTE: ON 4/3/2011, I EDITED THE STY FILE TO REMOVE SOME UNWANTED
-% KEYWORDS, SUCH AS *, <-, ETC.
 \lstset{ %
     language=python,                 % choose the language of the code
     basicstyle=\footnotesize\ttfamily,
@@ -151,7 +157,7 @@
   stringstyle=\color{mauve},      % string literal style
   escapeinside={\%*}{*)},         % if you want to add a comment within your code
   morekeywords={*,...}            % if you want to add more keywords to the set
-} 
+}
 
 % To import whole code file, use
 % \lstinputlisting{...}
@@ -181,7 +187,7 @@
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{groupplots}
 \usepgfplotslibrary{dateplot}
-%\usepackage{fontspec}  % optional
+% \usepackage{fontspec}  % optional
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -216,6 +222,12 @@
 % Counters
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
+
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\marginparwidth}{2cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -379,7 +391,7 @@
 \newcommand{\given}{\, | \,}
 \newcommand{\la}{\langle}
 \newcommand{\ra}{\rangle}
-% Indicator 
+% Indicator
 \newcommand{\ind}[1]{\mathbf{1}\parens{#1}}
 
 
@@ -511,6 +523,17 @@
 % Distributions
 % Normal
 \newcommand{\normal}[2]{\nN\parens{#1, #2}}
-
+\newcommand{\Bern}{\textrm{Bern}}
+\newcommand{\Bin}{\textrm{Bin}}
+\newcommand{\Beta}{\textrm{Beta}}
+\newcommand{\Gam}{\textrm{Gamma}}
+\newcommand{\Expo}{\textrm{Expo}}
+\newcommand{\Pois}{\textrm{Pois}}
+\newcommand{\Unif}{\textrm{Unif}}
+\newcommand{\Geom}{\textrm{Geom}}
+\newcommand{\NBin}{\textrm{NBin}}
+\newcommand{\HGeom}{\textrm{HGeom}}
+\newcommand{\Mult}{\textrm{Mult}}
+\newcommand{\Dir}{\textrm{Dirichlet}}
 
 % \end{extract*}
