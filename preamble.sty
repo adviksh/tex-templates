@@ -394,6 +394,10 @@
 % Indicator
 \newcommand{\ind}[1]{\mathbf{1}\parens{#1}}
 
+% Shortcut fractions
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\third}{\frac{1}{3}}
+\newcommand{\quart}{\frac{1}{4}}
 
 % PDE
 \newcommand{\pa}{\partial}
@@ -439,10 +443,6 @@
 \newcommand{\ZZ}{\mathbbm Z}
 \newcommand{\II}{\mathbbm I}
 \renewcommand{\SS}{\mathbbm S}
-
-% Expectation/Probability
-\newcommand{\ee}[1]{\mathop{{}\mathbb{E}}\parens{#1}}
-\newcommand{\pp}[1]{\mathop{{}\mathbb{P}}\parens{#1}}
 
 \newcommand{\GG}{\mathsf G}
 \newcommand{\XX}{\mathsf X}
@@ -495,9 +495,9 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\proj}{proj}
 \DeclareMathOperator{\rank}{rank}
-% \DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\cov}{Cov}
 \DeclareMathOperator{\corr}{Corr}
-% \DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\var}{Var}
 \DeclareMathOperator{\mse}{mse}
 \DeclareMathOperator{\se}{se}
 \DeclareMathOperator{\row}{row}
@@ -512,17 +512,11 @@
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\dive}{div}
 \DeclareMathOperator{\conv}{conv}
-
 \DeclareMathOperator{\supp}{Supp}
-
-\newcommand{\var}[1]{\text{Var}\parens{#1}}
-\newcommand{\cov}[1]{\text{Cov}\parens{#1}}
-% \newcommand{\corr}[1]{\text{Corr}\parens{#1}}
-\renewcommand{\exp}[1]{\text{exp}\braces{#1}}
 
 % Distributions
 % Normal
-\newcommand{\normal}[2]{\nN\parens{#1, #2}}
+\newcommand{\Normal}{\n}
 \newcommand{\Bern}{\textrm{Bern}}
 \newcommand{\Bin}{\textrm{Bin}}
 \newcommand{\Beta}{\textrm{Beta}}
