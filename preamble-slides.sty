@@ -1,0 +1,407 @@
+\ProvidesPackage{preamble}
+
+% Extract
+% \usepackage[active,
+%             generate=analysis_definitions,
+%             %extract-cmd={section},
+%             extract-env={definition,algorithm}]{extract}
+
+% \usepackage[active,
+%             generate=analysis_theorems,
+%             %extract-cmd={section},
+%             extract-env={theorem,corollary,claim}]{extract}
+
+% \begin{extract*}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND THEMES
+%----------------------------------------------------------------------------------------
+\usepackage[T1]{fontenc} %
+\usepackage{booktabs}    %
+
+
+%----------------------------------------------------------------------------------------
+% Basic text
+%----------------------------------------------------------------------------------------
+\usepackage{bm}          % Bolding
+\usepackage{soul}        % Underline and hyphen
+\usepackage{enumerate}   % additional options for {enumerate} environment
+\usepackage{hyperref}    % hyperlinks
+\usepackage{microtype}   % general typesetting
+
+\usepackage{comment}    % comment out blocks of tex code
+
+\usepackage{float}      % placement and positioning of figures / tables
+\usepackage{caption}    % captions for floats
+\usepackage{subcaption} % captions for subfigures / tables. works with hyperref; subfigure package does not.
+\usepackage[export]{adjustbox}
+
+%----------------------------------------------------------------------------------------
+% Bibliography
+%----------------------------------------------------------------------------------------
+\usepackage[
+  natbib=true,
+  backend=biber,
+  style=authoryear,  
+]{biblatex}
+
+
+%----------------------------------------------------------------------------------------
+% Math
+%----------------------------------------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm, amsbsy}         % math
+\usepackage{bbm}                                      % blackboard math fonts
+\usepackage[linesnumbered, lined, ruled]{algorithm2e} % algorithms
+\usepackage{mathtools}
+\usepackage{xparse}
+\usepackage{xfrac}
+
+%----------------------------------------------------------------------------------------
+% Colors
+%----------------------------------------------------------------------------------------
+\usepackage{xcolor}
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+\newcommand{\sym}[1]{{#1}}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+%----------------------------------------------------------------------------------------
+% Section Slides
+%----------------------------------------------------------------------------------------
+\AtBeginSection[]
+{
+    \begin{frame}        
+        \tableofcontents[currentsection]
+    \end{frame}
+}
+
+%----------------------------------------------------------------------------------------
+% Appendix
+%----------------------------------------------------------------------------------------
+\newcommand{\appendixbegin}{
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\appendixend}{
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}} 
+}
+
+%----------------------------------------------------------------------------------------
+% {itemize} and {enumerate} that fill more space
+%----------------------------------------------------------------------------------------
+\newenvironment{wideitemize}{\itemize\addtolength{\itemsep}{10pt}}{\enditemize}
+\newenvironment{wideenum}{\enumerate\addtolength{\itemsep}{10pt}}{\endenumerate}
+
+\newenvironment{textcolumn}{%
+   \setlength{\topsep}{0pt}
+   \setlength{\partopsep}{0pt}   
+}
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useoutertheme[subsection=false,shadow]{miniframes}
+
+%% drop small cycles(begin)
+\makeatletter
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{%
+  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}% does not happen normally
+  {%else
+    % removed \addtocontents commands
+    \clearpage\beamer@notesactions%
+  }
+}
+\newcommand*{\miniframeson}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+\miniframesoff
+%% drop small cycles(end)
+
+\useinnertheme{circles}
+
+\beamertemplatenavigationsymbolsempty
+
+\setbeamertemplate{footline}[frame number]
+%Fonts for experimental design
+
+% \definecolor{color1}{gray}{0.97}
+% \definecolor{color1a}{gray}{0.95}
+% \definecolor{color1b}{gray}{0.80}
+% \definecolor{color1c}{gray}{0.65}
+% \definecolor{color1d}{gray}{0.35}
+
+% \definecolor{color2}{RGB}{188, 232, 155}
+
+% \definecolor{color3}{RGB}{98, 173, 252}
+% \definecolor{color3a}{RGB}{53, 151, 252}
+% \definecolor{color3b}{RGB}{131, 188, 247}
+% \definecolor{color3b}{RGB}{247, 171, 29}
+
+%\definecolor{color3}{RGB}{151, 197, 244}
+% \definecolor{color4}{RGB}{170, 200, 237}
+% \definecolor{color5}{RGB}{206, 222, 239}
+
+% \definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+% \definecolor{janoschgreen}{rgb}{0.05, 0.5, 0.06}
+
+%Font for slides
+\definecolor{titletextcolor}{RGB}{66,146,198}
+\setbeamercolor{structure}{fg=titletextcolor}
+\setbeamercolor{cite}{fg=titletextcolor}
+
+%----------------------------------------------------------------------------------------
+% Math macros
+%----------------------------------------------------------------------------------------
+% Underbrace
+\newcommand\ub[2]{\underbrace{#1}_{#2}}
+\newcommand\ubt[2]{\underbrace{#1}_{\text{#2}}}
+\newcommand\obt[2]{\overbrace{#1}^{\text{#2}}}
+
+% Textcolors
+\newcommand\tcb[1]{\textcolor{blue}{#1}}
+\newcommand\tclb[1]{\textcolor{lightblue}{#1}}
+\newcommand\tcr[1]{\textcolor{ruby}{#1}}
+\newcommand\tcg[1]{\textcolor{green}{#1}}
+\newcommand\tcpr[1]{\textcolor{purple}{#1}}
+
+% Math ``brackets''
+\newcommand\parens[1]{\left( #1 \right)}
+\newcommand\squares[1]{\left[ #1 \right]}
+\newcommand\braces[1]{\left\{ #1 \right\}}
+\newcommand\angles[1]{\left\langle #1 \right\rangle}
+\newcommand\ceil[1]{\left\lceil #1 \right\rceil}
+\newcommand\floor[1]{\left\lfloor #1 \right\rfloor}
+\newcommand\abs[1]{\left| #1 \right|}
+\newcommand\dabs[1]{\left\| #1 \right\|}
+\newcommand\vect[1]{\mathbf{#1}}
+\newcommand\closure[1]{\overline{#1}}
+\newcommand\pset[1]{\mathcal{P}\left(#1\right)}
+\newcommand\inv[1]{#1^{-1}}
+\newcommand\norm[1]{\lVert#1\rVert}
+
+% variations of \frac and \sfrac
+\newcommand{\pfrac}[2]{\parens{\frac{#1}{#2}}} % enclosed in parentheses
+\newcommand{\bfrac}[2]{\squares{\frac{#1}{#2}}} % enclosed in square brackets
+\newcommand{\psfrac}[2]{\pa{\sfrac{#1}{#2}}} % sfrac enclosed in parentheses
+\newcommand{\bsfrac}[2]{\squares{\sfrac{#1}{#2}}} % sfrac enclosed in square brackets
+
+% Derivatives
+\newcommand{\td}[2]{\frac{d #1}{d #2}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\ptd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\pthd}[2]{\frac{\partial^3 #1}{\partial #2^3}}
+\newcommand{\ptmd}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+
+% Matrices
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+% for small matrices to be used in in-line expressions
+\newcommand{\sm}[1]{\begin{smallmatrix}#1\end{smallmatrix}} % no delimiters
+\newcommand{\psm}[1]{\parens{\sm{#1}}} % parentheses as delimiters
+\newcommand{\bsm}[1]{\squares{\sm{#1}}} % square brackets as delimiters
+
+% inner product
+\providecommand{\inner}[1]{\left\langle{#1}\right\rangle}
+% stochastic dominance
+\newcommand{\lesd}{\preceq_{\textrm{SD}}}
+
+% Set builder (use \Set ultimately and separate by ;)
+\DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
+\NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+{\setargsaux#1}
+\NewDocumentCommand{\setargsaux}{mm}
+{\IfNoValueTF{#2}{#1} {#1\nonscript\:\delimsize\vert\allowbreak\nonscript\:\mathopen{}#2}}%
+\def\Set{\set*}%
+
+% Shortcut math
+\newcommand{\ls}{\leqslant}
+\newcommand{\gs}{\geqslant}
+\def\ss{\subset}
+\def\sse{\subseteq}
+\def\nss{\not \ss}
+\def\nin{\not \in}
+\def\sps{\supset}
+\def\pss{\subsetneq}
+\def\prece{\preccurlyeq}
+\def\condgap{\hspace{1cm}}
+\def\eprec{\preceq}
+% argmax and min
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\es}{\emptyset}
+% Implication and reverse implication
+\def\imp{\Rightarrow}
+\def\pmi{\Leftarrow}
+% Integers up to number
+\newcommand\intsfin[1]{\braces{1, \ldots, #1}}
+% Logic
+\def\bic{\Leftrightarrow}
+% Bold and italic
+\newcommand\boldit[1]{\textbf{\textit{#1}}}
+
+% Misc math
+\newcommand{\suchthat}{\ensuremath{\ \mathrm{s.t.}\ }}
+\newcommand{\setntn}[2]{ \{ #1 : #2 \} }
+\newcommand{\cf}[1]{ \lstinline|#1| }
+\newcommand{\fore}{\therefore \quad}
+\newcommand{\tod}{\stackrel { d } {\to} }
+\newcommand{\tow}{\stackrel { w } {\to} }
+\newcommand{\toprob}{\stackrel { p } {\to} }
+\newcommand{\toms}{\stackrel { ms } {\to} }
+\newcommand{\eqdist}{\stackrel{d} {=} }
+\newcommand{\iidsim}{\stackrel{\textrm{ {\sc iid }}} {\sim} }
+\newcommand{\1}{\mathbbm 1}
+\newcommand{\dee}{\,{\rm d}}
+\newcommand{\given}{\, | \,}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+% Indicator
+
+% Shortcut fractions
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\onethird}{\frac{1}{3}}
+\newcommand{\twothird}{\frac{2}{3}}
+\newcommand{\quart}{\frac{1}{4}}
+
+% PDE
+\newcommand{\pa}{\partial}
+
+% Shortcut greek
+\def\a{\alpha}
+\def\b{\beta}
+\def\G{\Gamma}
+\def\g{\gamma}
+\def\D{\Delta}
+\def\d{\delta}
+\def\z{\zeta}
+\def\k{\kappa}
+\def\L{\Lambda}
+\def\l{\lambda}
+\def\n{\nu}
+\def\r{\rho}
+\def\s{\sigma}
+\def\t{\tau}
+\def\x{\xi}
+\def\w{\omega}
+\def\W{\Omega}
+\def\th{\theta}
+\def\Th{\Theta}
+% Nice greek
+\newcommand{\p}{\varphi}
+\newcommand{\e}{\varepsilon}
+
+% Shorcut vectors
+\def\vx{\vect{x}}
+\def\vy{\vect{y}}
+\def\va{\vect{a}}
+\def\vb{\vect{b}}
+\def\vn{\vect{n}}
+\def\vF{\vect{F}}
+
+\newcommand{\CC}{\mathbb C}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\VV}{\mathbb V}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\WW}{\mathbb W}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\II}{\mathbb I}
+\renewcommand{\SS}{\mathbb S}
+
+\newcommand{\GG}{\mathsf G}
+\newcommand{\XX}{\mathsf X}
+\renewcommand{\AA}{\mathsf A}
+\newcommand{\YY}{\mathsf Y}
+\newcommand{\ZZZ}{\mathsf Z}
+
+\newcommand{\aA}{\mathscr A}
+\newcommand{\cC}{\mathscr C}
+\newcommand{\iI}{\mathscr I}
+\newcommand{\eE}{\mathscr E}
+\newcommand{\fF}{\mathscr F}
+\newcommand{\rR}{\mathscr R}
+\newcommand{\sS}{\mathscr S}
+\newcommand{\cG}{\mathscr G}
+
+\newcommand{\pP}{\mathcal P}
+\newcommand{\vV}{\mathcal V}
+\newcommand{\dD}{\mathcal D}
+\newcommand{\mM}{\mathcal M}
+\newcommand{\nN}{\mathcal N}
+\newcommand{\oO}{\mathcal O}
+\newcommand{\gG}{\mathcal G}
+\newcommand{\hH}{\mathcal H}
+\newcommand{\tT}{\mathcal T}
+\newcommand{\bB}{\mathcal B}
+\newcommand{\lL}{\mathcal L}
+
+% Common collections
+\def\cA{\col{A}}
+\def\cB{\col{B}}
+\def\cC{\col{C}}
+\def\cT{\col{T}}
+\def\cU{\col{U}}
+
+% Common closures
+\def\clA{\closure{A}}
+\def\clB{\closure{B}}
+\def\clK{\closure{K}}
+
+% operators
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\graph}{graph}
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\Prob}{Prob}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\corr}{Corr}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\mse}{mse}
+\DeclareMathOperator{\se}{se}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
+\DeclareMathOperator{\range}{rng}
+\DeclareMathOperator{\kernel}{ker}
+\DeclareMathOperator{\dimension}{dim}
+\DeclareMathOperator{\bias}{bias}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ran}{ran}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\dive}{div}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\supp}{Supp}
+
+% Distributions
+% Normal
+\newcommand{\Normal}{\n}
+\newcommand{\Bern}{\textrm{Bern}}
+\newcommand{\Bin}{\textrm{Bin}}
+\newcommand{\Beta}{\textrm{Beta}}
+\newcommand{\Gam}{\textrm{Gamma}}
+\newcommand{\Expo}{\textrm{Expo}}
+\newcommand{\Pois}{\textrm{Pois}}
+\newcommand{\Unif}{\textrm{Unif}}
+\newcommand{\Geom}{\textrm{Geom}}
+\newcommand{\NBin}{\textrm{NBin}}
+\newcommand{\HGeom}{\textrm{HGeom}}
+\newcommand{\Mult}{\textrm{Mult}}
+\newcommand{\Dir}{\textrm{Dirichlet}}
+
+% \end{extract*}
