@@ -24,8 +24,10 @@
 % Colors
 \usepackage[dvipsnames]{xcolor}
 % Tables
+\usepackage{threeparttable}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{siunitx}
 % Figures
 \usepackage{graphicx}
 \usepackage{float}
@@ -86,15 +88,15 @@
   colorlinks = true,
 }
 % Bibliography
-% \usepackage[
-%   natbib=true,
-%   backend=biber,
-%   style=authoryear,
-%   hyperref=false,
-%   doi=false,
-%   url=false,
-%   isbn=false,
-% ]{biblatex}
+\usepackage[
+  natbib=true,
+  backend=biber,
+  style=authoryear,
+  hyperref=false,
+  doi=false,
+  url=false,
+  isbn=false,
+]{biblatex}
 
 % Indent
 \usepackage{indentfirst}
@@ -220,7 +222,7 @@
 % So pages will break inside long equation environments
 \allowdisplaybreaks
 % Font
-% \usepackage{ebgaramond}
+\usepackage{libertine}
 \linespread{1.05}
 %\usepackage{courier}
 % Geometry
@@ -399,12 +401,6 @@
 \newcommand{\ra}{\rangle}
 % Indicator
 \newcommand{\ind}[1]{\mathbf{1}\parens{#1}}
-
-% Shortcut fractions
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\onethird}{\frac{1}{3}}
-\newcommand{\twothird}{\frac{2}{3}}
-\newcommand{\quart}{\frac{1}{4}}
 
 % PDE
 \newcommand{\pa}{\partial}
